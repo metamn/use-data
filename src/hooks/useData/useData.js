@@ -5,6 +5,7 @@
  */
 import React from "react";
 import PropTypes from "prop-types";
+import axios from "axios";
 
 /**
  * Builds upon SWR.
@@ -36,15 +37,19 @@ const propTypes = {
    *
    * @see https://github.com/zeit/swr#options
    */
-  options: PropTypes.obj
+  options: PropTypes.object
 };
 
 /**
  * Defines the default props
  */
 const defaultProps = {
-  fetcher: url => {
-    return fetch(url).then(r => r.json());
+  key: "",
+  fetcher: () => {
+    console.log("Fetcher function");
+  },
+  options: {
+    initialData: "Loading..."
   }
 };
 
@@ -52,9 +57,45 @@ const defaultProps = {
  * Displays the component
  */
 const useData = props => {
-  const { data, error, isValidating, revalidate } = useSWR(...props);
+  const { key, options } = props;
+  const { initialData } = options;
 
-  return { data, error, isValidating, revalidate };
+  const fetcher = key =>
+    fetch(key).then(r => {
+      console.log("r:", r);
+      r.json();
+    });
+
+  console.log("k:", key);
+
+  /**
+   * Queries the database
+   */
+  const { data, error, isValidating, revalidate } = useSWR(
+    key,
+    fetcher,
+    options
+  );
+
+  /**
+   * Returns default data while real data is loaded from the database
+   */
+  if (data === undefined) {
+    return { data: initialData };
+  }
+
+  /**
+   * Logs to console when there is an error
+   */
+  if (error) {
+    console.log("useData error:" + error);
+    return { data: null };
+  }
+
+  /**
+   * Returns data and functions
+   */
+  return { data, isValidating, revalidate };
 };
 
 useData.propTypes = propTypes;
