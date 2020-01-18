@@ -12,6 +12,8 @@ const propTypes = {};
  */
 const defaultProps = {};
 
+const fetcher = url => fetch(url).then(response => response.json());
+
 /**
  * Displays the component
  */
@@ -30,7 +32,8 @@ const JsonPlaceholderSWR = props => {
    * Without fetcher the data is undefined
    */
   const { data, error } = useSWR(
-    "https://jsonplaceholder.typicode.com/todos/1"
+    "https://jsonplaceholder.typicode.com/todos/1",
+    fetcher
   );
 
   /**
@@ -59,6 +62,11 @@ const JsonPlaceholderSWR = props => {
       <hr />
       <br />
       <h3>JsonPlaceholderSWR</h3>
+      <p>
+        Uses `useSWR` which making a single request to the API the returns
+        results from the cache.{" "}
+      </p>
+      <p>However the code is much complex than in the case of `fetch`</p>
       <p>
         <button onClick={() => getTodo()}>Get Todo</button>
       </p>

@@ -29,6 +29,7 @@ const JsonPlaceholder = props => {
       <hr />
       <br />
       <h3>JsonPlaceholder</h3>
+      <p>Uses `fetch` which is always making a request to the API</p>
       <p>
         <button onClick={() => getTodo()}>Get Todo</button>
       </p>
