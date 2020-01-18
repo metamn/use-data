@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import axios from "axios";
 
-import useData, { useDataPropTypes, useDataDefaultProps } from "../../hooks";
+import useData, { useDataPropTypes } from "../../hooks";
 
 /**
  * Defines the prop types
@@ -13,14 +12,15 @@ const propTypes = useDataPropTypes;
  * Defines the default props
  */
 const defaultProps = {
-  key: "http://api.finsterdata.com/v2/usersss",
-  fetcher: key =>
-    axios(key).then(r => {
-      console.log("r:", r);
-      r.json();
-    }),
+  key: "https://jsonplaceholder.typicode.com/todos/1",
+  fetcher: url => fetch(url).then(response => response.json()),
   options: {
-    initialData: "Loading data afa..."
+    initialData: {
+      userId: 0,
+      id: 0,
+      title: "default",
+      completed: false
+    }
   }
 };
 
@@ -28,13 +28,27 @@ const defaultProps = {
  * Displays the component
  */
 const Test = props => {
-  const { data } = useData(props);
+  const [result, setResult] = useState();
+
+  const { data, error } = useData(props);
+
+  useEffect(() => {
+    if (error) setResult(JSON.stringify(error));
+    if (data) setResult(JSON.stringify(data));
+  }, [data, error]);
 
   return (
     <div className="Test">
+      <br />
+      <hr />
+      <br />
+      <h3>Testing the hook</h3>
       <ul>
-        <li key="data">Data: {data}</li>
+        <li key="data">Data: {result}</li>
       </ul>
+      <br />
+      <hr />
+      <br />
     </div>
   );
 };

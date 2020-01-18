@@ -5,12 +5,13 @@
  */
 import React from "react";
 import PropTypes from "prop-types";
-import axios from "axios";
 
 /**
  * Builds upon SWR.
  *
- * Currently SWR is the most powerful data fetching library
+ * - Currently SWR is the most powerful data fetching library
+ * - This package can be replaced anytime
+ * - Important is to keep the logic of this hook
  *
  * @see https://swr.now.sh/
  */
@@ -57,19 +58,16 @@ const defaultProps = {
  * Displays the component
  */
 const useData = props => {
-  const { key, options } = props;
+  /**
+   * Prepares params for useSWR
+   *
+   * - Note: `useSWR(props)` simply won't work ....
+   */
+  const { key, fetcher, options } = props;
   const { initialData } = options;
 
-  const fetcher = key =>
-    fetch(key).then(r => {
-      console.log("r:", r);
-      r.json();
-    });
-
-  console.log("k:", key);
-
   /**
-   * Queries the database
+   * Queries the API
    */
   const { data, error, isValidating, revalidate } = useSWR(
     key,
@@ -78,18 +76,17 @@ const useData = props => {
   );
 
   /**
-   * Returns default data while real data is loaded from the database
+   * Returns default data while real data is loaded from the API
    */
   if (data === undefined) {
-    return { data: initialData };
+    return { data: initialData, isValidating, revalidate };
   }
 
   /**
-   * Logs to console when there is an error
+   * Returns the error
    */
   if (error) {
-    console.log("useData error:" + error);
-    return { data: null };
+    return { data: null, isValidating, revalidate };
   }
 
   /**

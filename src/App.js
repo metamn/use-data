@@ -6,10 +6,12 @@ import Finster from "./components/Finster";
 import FinsterSWR from "./components/FinsterSWR";
 import JsonPl2 from "./components/JsonPl2";
 import Props from "./components/Props";
+import Test from "./components/Test";
 
 const App = () => {
   return (
     <>
+      <Test />
       <Props />
       <JsonPl2 />
       <Finster />
