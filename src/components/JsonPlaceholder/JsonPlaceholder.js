@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import useSWR from "swr";
 
 /**
  * Defines the prop types
@@ -16,7 +15,7 @@ const defaultProps = {};
  * Displays the component
  */
 const JsonPlaceholder = props => {
-  const [result, setResult] = useState("Results...");
+  const [result, setResult] = useState("...");
 
   const getTodo = props => {
     fetch("https://jsonplaceholder.typicode.com/todos/1")
@@ -31,7 +30,7 @@ const JsonPlaceholder = props => {
       <br />
       <h3>JsonPlaceholder</h3>
       <p>
-        <button onClick={() => getTodo(1)}>Get Todo</button>
+        <button onClick={() => getTodo()}>Get Todo</button>
       </p>
       <div className="result">
         Result:<p>{result}</p>
