@@ -20,22 +20,12 @@ const fetcher = url => fetch(url).then(response => response.json());
 /**
  * Displays the component
  */
-const JsonPlaceholderSWR = props => {
-  /**
-   * The displayed results
-   */
+const FinsterSWR = props => {
   const [result, setResult] = useState("...");
-
-  /**
-   * Results from the hook must be saved separately from the results which will be displayed
-   */
   const [resultSWR, setResultSWR] = useState("not set");
 
-  /**
-   * Without fetcher the data is undefined
-   */
   const { data, error } = useSWR(
-    "https://jsonplaceholder.typicode.com/todos/1",
+    "http://api.finsterdata.com/v1/login",
     fetcher
   );
 
@@ -43,7 +33,7 @@ const JsonPlaceholderSWR = props => {
    * Without useEffect it's an infinite loop
    */
   useEffect(() => {
-    console.log("useEffect JsonPlaceholder");
+    console.log("useEffect Finster");
 
     if (error) setResultSWR(JSON.stringify(error));
     console.log("...after error");
@@ -60,18 +50,13 @@ const JsonPlaceholderSWR = props => {
   };
 
   return (
-    <div className="JsonPlaceholderSWR">
+    <div className="FinsterSWR">
       <br />
       <hr />
       <br />
-      <h3>JsonPlaceholderSWR</h3>
+      <h3>FinsterSWR</h3>
       <p>
-        Uses `useSWR` which making a single request to the API the returns
-        results from the cache.{" "}
-      </p>
-      <p>However the code is much complex than in the case of `fetch`</p>
-      <p>
-        <button onClick={() => getTodo()}>Get Todo</button>
+        <button onClick={() => getTodo()}>Is Logged in?</button>
       </p>
       <div className="result">
         Result:<p>{result}</p>
@@ -83,11 +68,11 @@ const JsonPlaceholderSWR = props => {
   );
 };
 
-JsonPlaceholderSWR.propTypes = propTypes;
-JsonPlaceholderSWR.defaultProps = defaultProps;
+FinsterSWR.propTypes = propTypes;
+FinsterSWR.defaultProps = defaultProps;
 
-export default JsonPlaceholderSWR;
+export default FinsterSWR;
 export {
-  propTypes as JsonPlaceholderSWRPropTypes,
-  defaultProps as JsonPlaceholderSWRDefaultProps
+  propTypes as FinsterSWRPropTypes,
+  defaultProps as FinsterSWRDefaultProps
 };
