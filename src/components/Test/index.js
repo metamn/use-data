@@ -1,1 +1,1 @@
-export { default, TestPropTypes, TestDefaultProps } from "./Test";
+export { default } from "./Test";

@@ -11,7 +11,6 @@ import PropTypes from "prop-types";
  *
  * - Currently SWR is the most powerful data fetching library
  * - This package can be replaced anytime
- * - Important is to keep the logic of this hook
  *
  * @see https://swr.now.sh/
  */

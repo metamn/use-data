@@ -1,18 +1,28 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 
-import useData, { useDataPropTypes } from "../../hooks";
-
-/**
- * Defines the prop types
- */
-const propTypes = useDataPropTypes;
+import useData from "../../hooks";
 
 /**
- * Defines the default props
+ * Defines the props for API 1
  */
-const defaultProps = {
+const api1 = {
   key: "https://jsonplaceholder.typicode.com/todos/1",
+  fetcher: url => fetch(url).then(response => response.json()),
+  options: {
+    initialData: {
+      userId: 0,
+      id: 0,
+      title: "default",
+      completed: false
+    }
+  }
+};
+
+/**
+ * Defines the props for API 2
+ */
+const api2 = {
+  key: "http://api.finsterdata.com/v1/login",
   fetcher: url => fetch(url).then(response => response.json()),
   options: {
     initialData: {
@@ -29,8 +39,9 @@ const defaultProps = {
  */
 const Test = props => {
   const [result, setResult] = useState();
+  const [api, setApi] = useState(api2);
 
-  const { data, error } = useData(props);
+  const { data, error } = useData(api);
 
   useEffect(() => {
     if (error) setResult(JSON.stringify(error));
@@ -45,6 +56,12 @@ const Test = props => {
       <h3>Testing the hook</h3>
       <ul>
         <li key="data">Data: {result}</li>
+        <li key="data1">
+          <button onClick={() => setApi(api1)}>Api 1</button>
+        </li>
+        <li key="data2">
+          <button onClick={() => setApi(api2)}>Api 2</button>
+        </li>
       </ul>
       <br />
       <hr />
@@ -53,8 +70,4 @@ const Test = props => {
   );
 };
 
-Test.propTypes = propTypes;
-Test.defaultProps = defaultProps;
-
 export default Test;
-export { propTypes as TestPropTypes, defaultProps as TestDefaultProps };
