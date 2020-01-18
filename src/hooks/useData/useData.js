@@ -10,7 +10,21 @@ import PropTypes from "prop-types";
  * Builds upon SWR.
  *
  * - Currently SWR is the most powerful data fetching library
- * - This package can be replaced anytime
+ * - This package can be replaced anytime.
+ * - Important is to keep the logic:
+ *   - The hook is set up via props
+ *   - Returns default data while real data is loading
+ *   - Returns the error and the various functions provided by the library
+ *   - The caller component manages the results via state, effect
+ *
+ * ```
+ * const { data, error } = useData(api);
+
+ useEffect(() => {
+   if (error) setResult(JSON.stringify(error));
+   if (data) setResult(JSON.stringify(data));
+ }, [data, error]);
+ ```
  *
  * @see https://swr.now.sh/
  */
