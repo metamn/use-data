@@ -13,7 +13,7 @@ const propTypes = useDataPropTypes;
  * Defines the default props
  */
 const defaultProps = {
-  key: "http://api.finsterdata.com/v1/user",
+  key: "http://api.finsterdata.com/v2/usersss",
   fetcher: key =>
     axios(key).then(r => {
       console.log("r:", r);

@@ -1,9 +1,9 @@
 import React from "react";
 
-import Test from "./components/Test";
+import JsonPlaceholder from "./components/JsonPlaceholder";
 
 const App = () => {
-  return <Test />;
+  return <JsonPlaceholder />;
 };
 
 export default App;
