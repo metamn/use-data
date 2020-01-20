@@ -10,21 +10,10 @@ import PropTypes from "prop-types";
  * Builds upon SWR.
  *
  * - Currently SWR is the most powerful data fetching library
- * - This package can be replaced anytime.
- * - Important is to keep the logic:
- *   - The hook is set up via props
- *   - Returns default data while real data is loading
- *   - Returns the error and the various functions provided by the library
- *   - The caller component manages the results via state, effect
- *
- * ```
- * const { data, error } = useData(api);
 
- useEffect(() => {
-   if (error) setResult(JSON.stringify(error));
-   if (data) setResult(JSON.stringify(data));
- }, [data, error]);
- ```
+ * - This library can be replaced anytime with similar packages which provide the same logic:
+ *   - Returns default data while real data is loading
+ *   - Returns the error object and the various other functions (re-fethcing, etc.)
  *
  * @see https://swr.now.sh/
  */
@@ -35,19 +24,19 @@ import useSWR from "swr";
  */
 const propTypes = {
   /**
-   * Where to fetch from, and what to fetch with useSWR
+   * Where to fetch from, and what to fetch
    *
    * @see https://github.com/zeit/swr#conditional-fetching
    */
   key: PropTypes.any,
   /**
-   * The fetcher function for useSWR
+   * The fetcher function
    *
    * @see https://github.com/zeit/swr#data-fetching
    */
   fetcher: PropTypes.func,
   /**
-   * The options for useSWR
+   * The options
    *
    * @see https://github.com/zeit/swr#options
    */
@@ -68,7 +57,7 @@ const defaultProps = {
 };
 
 /**
- * Displays the component
+ * Implements the hook
  */
 const useData = props => {
   /**
