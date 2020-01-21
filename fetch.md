@@ -1,1 +1,1 @@
-A sepcial branch for fetch
+A special branch for fetch

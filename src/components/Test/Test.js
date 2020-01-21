@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import useData from "../../hooks";
+import useDataSWR from "../../hooks";
 
 /**
  * Defines the props for API 1
@@ -41,7 +41,7 @@ const Test = props => {
   const [result, setResult] = useState();
   const [api, setApi] = useState(api2);
 
-  const { data, error } = useData(api);
+  const { data, error } = useDataSWR(api);
 
   useEffect(() => {
     if (error) setResult(JSON.stringify(error));
