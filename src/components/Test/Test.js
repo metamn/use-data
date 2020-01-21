@@ -26,10 +26,11 @@ const api2 = {
   fetcher: url => fetch(url).then(response => response.json()),
   options: {
     initialData: {
-      userId: 0,
-      id: 0,
-      title: "default",
-      completed: false
+      status: "",
+      error_code: "",
+      error: "",
+      user_message: "",
+      user_message_lang: "en"
     }
   }
 };
