@@ -56,12 +56,40 @@ const useData = props => {
    */
   const { resource, init, initialData } = props;
 
-  return fetch(resource, init)
+  /**
+   * Queries the API
+   */
+  const { data, error } = fetch(resource)
     .then(response => response.json())
     .then(data => {
       console.log("d1:", data);
-      return data;
+      return { data: data };
     });
+
+  /**
+   * Returns default data while real data is loaded from the API
+   */
+  if (data === undefined) {
+    console.log("ud:", data);
+    return { data: initialData };
+  } else {
+    console.log("xxxxx");
+  }
+
+  /**
+   * Returns the error
+   */
+  if (error) {
+    console.log("e:", error);
+    return { data: null };
+  }
+
+  console.log("ok");
+
+  /**
+   * Returns data and functions
+   */
+  return { data };
 };
 
 useData.propTypes = propTypes;

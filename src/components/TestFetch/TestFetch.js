@@ -36,7 +36,6 @@ const TestFetch = props => {
   const [api, setApi] = useState(api2);
 
   const { data } = useData(api);
-  console.log("d2:", data);
 
   useEffect(() => {
     console.log("d:", data);
