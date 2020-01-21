@@ -3,57 +3,48 @@
  *
  * @see useData.md
  */
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
 /**
- * Builds upon SWR.
+ * Builds upon the Fetch API.
  *
- * - Currently SWR is the most powerful data fetching library
-
- * - This library can be replaced anytime with similar packages which provide the same logic:
- *   - Returns default data while real data is loading
- *   - Returns the error object and the various other functions (re-fethcing, etc.)
+ * - Fetch API is the browser's default way to fetch data
  *
- * @see https://swr.now.sh/
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
  */
-import useSWR from "swr";
 
 /**
  * Defines the prop types
  */
 const propTypes = {
   /**
-   * Where to fetch from, and what to fetch
+   * Defines the resource to fetch
    *
-   * @see https://github.com/zeit/swr#conditional-fetching
+   * @see https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch
    */
-  key: PropTypes.any,
+  resource: PropTypes.string,
   /**
-   * The fetcher function
+   * Defines additional options
    *
-   * @see https://github.com/zeit/swr#data-fetching
+   * @see https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch
    */
-  fetcher: PropTypes.func,
+  init: PropTypes.object,
   /**
-   * The options
+   * The initial / default data to return while loading the real data from the server
    *
-   * @see https://github.com/zeit/swr#options
+   * - Added to comply with other fetching methods / packages like SWR
    */
-  options: PropTypes.object
+  initialData: PropTypes.any
 };
 
 /**
  * Defines the default props
  */
 const defaultProps = {
-  key: "",
-  fetcher: () => {
-    console.log("Fetcher function");
-  },
-  options: {
-    initialData: "Loading..."
-  }
+  resource: "",
+  init: {},
+  initialData: "Loading...."
 };
 
 /**
@@ -61,40 +52,16 @@ const defaultProps = {
  */
 const useData = props => {
   /**
-   * Prepares params for useSWR
-   *
-   * - Note: `useSWR(props)` simply won't work ....
+   * Preparing the props
    */
-  const { key, fetcher, options } = props;
-  const { initialData } = options;
+  const { resource, init, initialData } = props;
 
-  /**
-   * Queries the API
-   */
-  const { data, error, isValidating, revalidate } = useSWR(
-    key,
-    fetcher,
-    options
-  );
-
-  /**
-   * Returns default data while real data is loaded from the API
-   */
-  if (data === undefined) {
-    return { data: initialData, isValidating, revalidate };
-  }
-
-  /**
-   * Returns the error
-   */
-  if (error) {
-    return { data: null, isValidating, revalidate };
-  }
-
-  /**
-   * Returns data and functions
-   */
-  return { data, isValidating, revalidate };
+  return fetch(resource, init)
+    .then(response => response.json())
+    .then(data => {
+      console.log("d1:", data);
+      return data;
+    });
 };
 
 useData.propTypes = propTypes;
