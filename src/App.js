@@ -13,6 +13,7 @@ const App = () => {
   return (
     <>
       <Reqres />
+      {/*
       <Test />
       <Props />
       <JsonPl2 />
@@ -20,6 +21,7 @@ const App = () => {
       <FinsterSWR />
       <JsonPlaceholder />
       <JsonPlaceholderSWR />
+	  */}
     </>
   );
 };
