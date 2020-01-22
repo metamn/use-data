@@ -41,7 +41,7 @@ const useData = props => {
   /**
    * Queries the API
    */
-  const { data, error, reload, cancel } = useDataAsync(options);
+  const { data, error, reload, cancel } = useDataAsync({ options: options });
 
   /**
    * Returns default data while real data is loaded from the API
