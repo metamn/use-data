@@ -1,18 +1,22 @@
-## useData
+# useData
 
-## useSWR
+A hook for working with data
 
-- it acts strange due to its built in caching mechanism
-- for example clicking a button to an API call can do nothing at all.
-- or, even if in the network tab a result is retrieved the UI stays the same, without being refreshed
+## How it works?
 
-## Usage
+1. Returns default data while real data is loaded from the API
+2. Returns errors, if there are any
+3. Returns the data once loaded from the API
 
-```js
-const { data, error } = useData(api);
+## Strategies
 
-useEffect(() => {
-  if (error) setResult(JSON.stringify(error));
-  if (data) setResult(JSON.stringify(data));
-}, [data, error]);
-```
+The hook offers a skeleton in which any strategies (data fetching libraries) can be plugged in.
+
+### react-async
+
+- https://github.com/async-library/react-async
+
+### useSWR
+
+- https://swr.now.sh/
+- It's complicated due to the cache. Sometimes the UI is not refreshed even if in the network tab we have a successful request returning status code 200.
