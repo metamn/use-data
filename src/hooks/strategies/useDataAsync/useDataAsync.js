@@ -29,14 +29,17 @@ const defaultProps = {
  */
 const useDataAsync = props => {
   const { options } = props;
-  const { promiseFn } = options;
+  const { promiseFn, promiseFnParams } = options;
 
   /**
    * Runs the query and returns various values
    *
    * @see https://docs.react-async.com/api/state
    */
-  const { data, error, reload, cancel } = useAsync({ promiseFn: promiseFn });
+  const { data, error, reload, cancel } = useAsync({
+    promiseFn: promiseFn,
+    ...promiseFnParams
+  });
 
   return { data, error, reload, cancel };
 };

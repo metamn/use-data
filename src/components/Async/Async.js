@@ -48,6 +48,7 @@ const fetcherLogin = async ({ credentials }) => {
 const Async = props => {
   const options = {
     promiseFn: fetcherLogin,
+    promiseFnParams: { credentials: credentials },
     initialValue: "Loading...."
   };
 
