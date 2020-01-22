@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
 import useData, { useDataPropTypes, useDataDefaultProps } from "../../hooks";
@@ -28,6 +28,7 @@ const credentials = {
  */
 const fetcherLogin = async ({ credentials }) => {
   const data = credentials;
+  console.log("c:", data);
 
   const response = await fetch("https://reqres.in/api/login", {
     method: "POST",
@@ -37,9 +38,7 @@ const fetcherLogin = async ({ credentials }) => {
     body: JSON.stringify(data)
   });
 
-  console.log("r:", response);
-
-  if (!response.ok) throw new Error(response.status);
+  if (!response.ok) throw new Error(`Error: ${response.statusText}`);
   return response.json();
 };
 
@@ -52,12 +51,18 @@ const Async = props => {
     initialValue: "Loading...."
   };
 
+  const [result, setResult] = useState();
   const { data, error } = useData({ options: options });
+
+  useEffect(() => {
+    if (data) setResult(JSON.stringify(data));
+    if (error) setResult(error.message);
+  }, [error, data]);
 
   return (
     <div className="Async">
       <ul>
-        <li key="data">Data: xxx</li>
+        <li key="data">Data: {result}</li>
       </ul>
     </div>
   );

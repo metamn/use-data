@@ -31,17 +31,12 @@ const useDataAsync = props => {
   const { options } = props;
   const { promiseFn } = options;
 
-  console.log("op:", options);
-
   /**
    * Runs the query and returns various values
    *
    * @see https://docs.react-async.com/api/state
    */
   const { data, error, reload, cancel } = useAsync({ promiseFn: promiseFn });
-
-  console.log("e:", error);
-  console.log("d:", data);
 
   return { data, error, reload, cancel };
 };

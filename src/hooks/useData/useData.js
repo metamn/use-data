@@ -46,21 +46,21 @@ const useData = props => {
   /**
    * Returns default data while real data is loaded from the API
    */
-  if (data === undefined) {
-    return { data: initialValue, reload, cancel };
+  if (data !== undefined) {
+    return { data: initialValue, error, reload, cancel };
   }
 
   /**
    * Returns the error
    */
   if (error) {
-    return { data: null, reload, cancel };
+    return { data: null, error, reload, cancel };
   }
 
   /**
    * Returns data and functions
    */
-  return { data, reload, cancel };
+  return { data: data, reload, cancel };
 };
 
 useData.propTypes = propTypes;
