@@ -7,10 +7,12 @@ import FinsterSWR from "./components/FinsterSWR";
 import JsonPl2 from "./components/JsonPl2";
 import Props from "./components/Props";
 import Test from "./components/Test";
+import Reqres from "./components/Reqres";
 
 const App = () => {
   return (
     <>
+      <Reqres />
       <Test />
       <Props />
       <JsonPl2 />
