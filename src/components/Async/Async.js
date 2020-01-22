@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import useData, { useDataPropTypes } from "../../hooks";
+import useData, { useDataPropTypes, useDataDefaultProps } from "../../hooks";
 
 /**
  * Defines the prop types
@@ -11,50 +11,48 @@ const propTypes = PropTypes.shape(useDataPropTypes);
 /**
  * Defines the default props
  */
-const defaultProps = {
-  resource: "https://reqres.in/api",
-  init: {
+const defaultProps = useDataDefaultProps;
+
+/**
+ * Reqres.in specific credentials
+ *
+ * @see https://reqres.in/
+ */
+const credentials = {
+  email: "eve.holt@reqres.in",
+  password: "cityslicka"
+};
+
+/**
+ * Reqres.in specific fetcher
+ */
+const fetcherLogin = async ({ credentials }) => {
+  const data = credentials;
+
+  const response = await fetch("https://reqres.in/api/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({})
-  },
-  options: {
-    initialValue: "Loading ...."
-  },
-  fetcher: () => console.log("Fetcher function for Async")
+    body: JSON.stringify(data)
+  });
+
+  console.log("r:", response);
+
+  if (!response.ok) throw new Error(response.status);
+  return response.json();
 };
 
 /**
  * Displays the component
  */
 const Async = props => {
-  const { resource, init, options, fetcher } = props;
-
-  const credentials = {
-    email: "eve.holt@reqres.in",
-    password: "cityslicka"
+  const options = {
+    promiseFn: fetcherLogin,
+    initialValue: "Loading...."
   };
 
-  const fetcherLogin = async ({ credentials }) => {
-    const response = await fetch(`$resource/login`, {
-      ...init,
-      body: JSON.stringify(credentials)
-    });
-
-    console.log("r:", response);
-
-    if (!response.ok) throw new Error(response.status);
-    return response.json();
-  };
-
-  const { data, error } = useData({
-    resource: resource,
-    init: init,
-    options: options,
-    fetcher: fetcherLogin
-  });
+  const { data, error } = useData({ options: options });
 
   return (
     <div className="Async">

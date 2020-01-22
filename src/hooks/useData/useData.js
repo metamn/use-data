@@ -35,13 +35,13 @@ const useData = props => {
    *
    * - This step has to be performed to map a strategy to the hook code below
    */
-  const { resource, init, options } = props;
+  const { options } = props;
   const { initialValue } = options;
 
   /**
    * Queries the API
    */
-  const { data, error, reload, cancel } = useDataAsync(props);
+  const { data, error, reload, cancel } = useDataAsync(options);
 
   /**
    * Returns default data while real data is loaded from the API
