@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useFetch } from "react-async";
+import { useAsync } from "react-async";
 
 /**
  * Defines the prop types
@@ -27,7 +27,13 @@ const propTypes = {
    *
    * @see https://docs.react-async.com/api/options
    */
-  options: PropTypes.object
+  options: PropTypes.object,
+  /**
+   * A fetcher function
+   *
+   * @see https://docs.react-async.com/guide/async-components#more-flexibility-with-useasync
+   */
+  fetcher: PropTypes.func
 };
 
 /**
@@ -38,22 +44,25 @@ const defaultProps = {
   init: {},
   options: {
     initialValue: "Loading ...."
-  }
+  },
+  fetcher: () => console.log("Fetcher fumction for useDataAsync")
 };
 
 /**
  * Displays the component
  */
 const useDataAsync = props => {
-  const { resource, init, options } = props;
+  const { resource, init, options, fetcher } = props;
 
   /**
    * Runs the query and returns various values
    *
    * @see https://docs.react-async.com/api/state
    */
-  const state = useFetch(resource, init, options);
-  const { data, error, reload, cancel } = state;
+  const { data, error, reload, cancel } = useAsync(
+    { promiseFn: fetcher, ...init },
+    options
+  );
 
   return { data, error, reload, cancel };
 };
