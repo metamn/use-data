@@ -46,7 +46,7 @@ const useData = props => {
   /**
    * Returns default data while real data is loaded from the API
    */
-  if (data !== undefined) {
+  if (data === undefined) {
     return { data: initialValue, error, reload, cancel };
   }
 
