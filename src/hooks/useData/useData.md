@@ -1,8 +1,24 @@
 # useData
 
-A hook for working with data
+React data hook with pluggable strategies
+
+## Why another library?
+
+- The official [Suspense for data fetching](https://reactjs.org/docs/concurrent-mode-suspense.html) is experimental at this moment
+- What's left is to use similar libraries (strategies) like SWR or `react-async`
+
+## Approach
+
+- Build a general data hook
+- Integrate any library (strategy) like:
+
+  - SWR
+  - react-async
+  - and more
 
 ## How it works?
+
+No matter the strategy used the hook always works the same way.
 
 1. Returns default data while real data is loaded from the API
 2. Returns errors, if there are any
@@ -11,6 +27,8 @@ A hook for working with data
 ## Strategies
 
 The hook offers a skeleton in which any strategies (data fetching libraries) can be plugged in.
+
+Currently these strategies are implemented:
 
 ### react-async
 
