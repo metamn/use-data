@@ -36,19 +36,18 @@ const credentials = {
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
  */
-const fetcherLogin = async (key, credentials) => {
-  const data = credentials;
-
-  const response = await fetch(key, {
+const fetcherLogin = (url, data) => {
+  fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
     body: JSON.stringify(data)
+  }).then(response => {
+    const j = response.json();
+    console.log("r:", j);
+    return j;
   });
-
-  if (!response.ok) throw new Error(`Error: ${response.statusText}`);
-  return response.json();
 };
 
 /**
@@ -61,7 +60,7 @@ const SWR = props => {
    * Sets up the params for the hook
    */
   const params = {
-    key: "https://reqres.in/api/login",
+    key: ["https://reqres.in/api/login", credentials],
     fetcher: fetcherLogin,
     options: options
   };

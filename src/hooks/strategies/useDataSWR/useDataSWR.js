@@ -58,7 +58,6 @@ const getInitialValue = props => {
  * - Used in `useData` for mapping the params pf the hook
  */
 const getHookProps = props => {
-  console.log("p:", props);
   const { key, fetcher, options } = props;
 
   return { key, fetcher, options };
