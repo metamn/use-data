@@ -41,6 +41,30 @@ const defaultProps = {
 };
 
 /**
+ * Returns the initial value
+ *
+ * - Used in `useData` for mapping `initialValue`
+ */
+const getInitialValue = props => {
+  const { options } = props;
+  const { initialData } = options;
+
+  return initialData;
+};
+
+/**
+ * Returns the params to call the hook
+ *
+ * - Used in `useData` for mapping the params pf the hook
+ */
+const getHookProps = props => {
+  console.log("p:", props);
+  const { key, fetcher, options } = props;
+
+  return { key, fetcher, options };
+};
+
+/**
  * Defines the hook functionality
  */
 const useDataSWR = props => {
@@ -74,5 +98,7 @@ useDataSWR.defaultProps = defaultProps;
 export default useDataSWR;
 export {
   propTypes as useDataSWRPropTypes,
-  defaultProps as useDataSWRDefaultProps
+  defaultProps as useDataSWRDefaultProps,
+  getHookProps as useDataSWRGetHookProps,
+  getInitialValue as useDataSWRGetInitialValue
 };
