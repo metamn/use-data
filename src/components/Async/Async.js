@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
+/**
+ * Loads the data hook
+ */
 import useData, { useDataPropTypes, useDataDefaultProps } from "../../hooks";
 
 /**
@@ -14,6 +17,8 @@ const propTypes = PropTypes.shape(useDataPropTypes);
 const defaultProps = useDataDefaultProps;
 
 /**
+ * This example queries the Reqres.in API
+ *
  * Reqres.in specific credentials
  *
  * @see https://reqres.in/
@@ -25,10 +30,14 @@ const credentials = {
 
 /**
  * Reqres.in specific fetcher
+ *
+ * Every API has to have its own fetcher.
+ * More, every API call can have its own fetcher.
+ *
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
  */
 const fetcherLogin = async ({ credentials }) => {
   const data = credentials;
-  console.log("c:", data);
 
   const response = await fetch("https://reqres.in/api/login", {
     method: "POST",
@@ -46,15 +55,28 @@ const fetcherLogin = async ({ credentials }) => {
  * Displays the component
  */
 const Async = props => {
+  /**
+   * Sets up the params for the hook
+   */
   const options = {
     promiseFn: fetcherLogin,
     promiseFnParams: { credentials: credentials },
     initialValue: "Loading...."
   };
 
+/**
+ * Sets up state to store the API call results (data, error)
+ */
   const [result, setResult] = useState();
+
+  /**
+   * Preforms the API call
+   */
   const { data, error } = useData({ options: options });
 
+/**
+ * Saves the API call results into the state
+ */
   useEffect(() => {
     if (data) setResult(JSON.stringify(data));
     if (error) setResult(error.message);
