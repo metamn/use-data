@@ -32,7 +32,7 @@ Currently these strategies are implemented:
 
 ### react-async
 
-- https://github.com/async-library/react-async
+See the [hook docs](../strategies/useDataAsync/useDataAsync.md) for details.
 
 ### useSWR
 

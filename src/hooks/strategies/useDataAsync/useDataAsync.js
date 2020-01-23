@@ -7,19 +7,31 @@ import { useAsync } from "react-async";
  */
 const propTypes = {
   /**
-   * React-async specific options
+   * `useAsync` specific options
    *
-   * @see https://docs.react-async.com/api/options
+   * @see https://docs.react-async.com/api/interfaces#useasync-hook
    */
   options: PropTypes.object
 };
 
 /**
  * Defines the default props
+ *
+ * - These options are mandatory
  */
 const defaultProps = {
   options: {
+    /**
+    * The fetcher function
+    */
     promiseFn: () => console.log("Fetcher fumction for useDataAsync"),
+    /**
+    * Params for the fetcher function, if any
+    */
+    promiseFnParams: {},
+    /**
+    * The default / initial data to be returned
+    */
     initialValue: "Loading ...."
   }
 };
@@ -34,7 +46,8 @@ const useDataAsync = props => {
   /**
    * Runs the query and returns various values
    *
-   * @see https://docs.react-async.com/api/state
+   * @see https://docs.react-async.com/api/state - for return values
+   * @see https://docs.react-async.com/guide/async-components#more-flexibility-with-useasync - for useAsync example
    */
   const { data, error, reload, cancel } = useAsync({
     promiseFn: promiseFn,
