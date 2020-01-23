@@ -36,18 +36,17 @@ const credentials = {
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
  */
-const fetcherLogin = (url, data) => {
-  fetch(url, {
+const fetcherLogin = async (url, data) => {
+  const response = await fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
     body: JSON.stringify(data)
-  }).then(response => {
-    const j = response.json();
-    console.log("r:", j);
-    return j;
   });
+
+  if (!response.ok) throw new Error(`Error: ${response.statusText}`);
+  return response.json();
 };
 
 /**
