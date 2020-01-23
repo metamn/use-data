@@ -38,6 +38,29 @@ const defaultProps = {
 };
 
 /**
+ * Returns the initial value
+ *
+ * - Used in `useData` for mapping `initialValue`
+ */
+const getInitialValue = props => {
+  const { options } = props;
+  const { initialValue } = options;
+
+  return initialValue;
+};
+
+/**
+ * Returns the params to call the hook
+ *
+ * - Used in `useData` for mapping the params pf the hook
+ */
+const getHookProps = props => {
+  const { options } = props;
+
+  return { options: options };
+};
+
+/**
  * Defines the hook functionality
  */
 const useDataAsync = props => {
@@ -64,5 +87,7 @@ useDataAsync.defaultProps = defaultProps;
 export default useDataAsync;
 export {
   propTypes as useDataAsyncPropTypes,
-  defaultProps as useDataAsyncDefaultProps
+  defaultProps as useDataAsyncDefaultProps,
+  getHookProps as useDataAsyncGetHookProps,
+  getInitialValue as useDataAsyncGetInitialValue
 };

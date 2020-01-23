@@ -1,5 +1,7 @@
 export {
   default,
   useDataAsyncPropTypes,
-  useDataAsyncDefaultProps
+  useDataAsyncDefaultProps,
+  useDataAsyncGetHookProps,
+  useDataAsyncGetInitialValue
 } from "./useDataAsync";

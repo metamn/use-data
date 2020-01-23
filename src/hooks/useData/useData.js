@@ -13,18 +13,27 @@ import PropTypes from "prop-types";
  */
 import useDataAsync, {
   useDataAsyncPropTypes,
-  useDataAsyncDefaultProps
+  useDataAsyncDefaultProps,
+  useDataAsyncGetHookProps,
+  useDataAsyncGetInitialValue
 } from "../strategies/useDataAsync";
+
+import useDataSWR, {
+  useDataSWRPropTypes,
+  useDataSWRDefaultProps
+} from "../strategies/useDataSWR";
 
 /**
  * Defines the prop types
  */
 const propTypes = PropTypes.shape(useDataAsyncPropTypes);
+//const propTypes = PropTypes.shape(useDataSWRPropTypes);
 
 /**
  * Defines the default props
  */
 const defaultProps = useDataAsyncDefaultProps;
+//const defaultProps = useDataSWRDefaultProps;
 
 /**
  * Implements the hook
@@ -35,13 +44,13 @@ const useData = props => {
    *
    * - This step has to be performed to map a strategy to the hook code below
    */
-  const { options } = props;
-  const { initialValue } = options;
+  const initialValue = useDataAsyncGetInitialValue(props);
+  const hookProps = useDataAsyncGetHookProps(props);
 
   /**
    * Queries the API
    */
-  const { data, error, reload, cancel } = useDataAsync({ options: options });
+  const { data, error, reload, cancel } = useDataAsync(hookProps);
 
   /**
    * Returns default data while real data is loaded from the API
