@@ -64,9 +64,9 @@ const Async = props => {
     initialValue: "Loading...."
   };
 
-/**
- * Sets up state to store the API call results (data, error)
- */
+  /**
+   * Sets up state to store the API call results (data, error)
+   */
   const [result, setResult] = useState();
 
   /**
@@ -74,9 +74,9 @@ const Async = props => {
    */
   const { data, error } = useData({ options: options });
 
-/**
- * Saves the API call results into the state
- */
+  /**
+   * Saves the API call results into the state
+   */
   useEffect(() => {
     if (data) setResult(JSON.stringify(data));
     if (error) setResult(error.message);
@@ -84,6 +84,7 @@ const Async = props => {
 
   return (
     <div className="Async">
+      <h3>react-async</h3>
       <ul>
         <li key="data">Data: {result}</li>
       </ul>

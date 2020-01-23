@@ -15,7 +15,14 @@ const defaultProps = {};
  * Displays the component
  */
 const SWR = props => {
-  return <div className="SWR">SWR</div>;
+  return (
+    <div className="SWR">
+      <h3>SWR</h3>
+      <ul>
+        <li key="data">Data: xxx</li>
+      </ul>
+    </div>
+  );
 };
 
 SWR.propTypes = propTypes;

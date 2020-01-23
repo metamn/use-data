@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+
 import { useAsync } from "react-async";
 
 /**
@@ -22,22 +23,22 @@ const propTypes = {
 const defaultProps = {
   options: {
     /**
-    * The fetcher function
-    */
-    promiseFn: () => console.log("Fetcher fumction for useDataAsync"),
+     * The fetcher function
+     */
+    promiseFn: () => console.log("Fetcher function for useDataAsync"),
     /**
-    * Params for the fetcher function, if any
-    */
+     * Params for the fetcher function, if any
+     */
     promiseFnParams: {},
     /**
-    * The default / initial data to be returned
-    */
+     * The default / initial data to be returned
+     */
     initialValue: "Loading ...."
   }
 };
 
 /**
- * Displays the component
+ * Defines the hook functionality
  */
 const useDataAsync = props => {
   const { options } = props;
