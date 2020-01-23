@@ -9,24 +9,20 @@ React data hook with pluggable strategies
 
 ## Approach
 
-- Build a general data hook
-- Integrate any library (strategy) like:
+1. Build a general data hook
+2. Integrate any library (strategy) like:
 
   - SWR
   - react-async
   - and more
 
-## How it works?
-
-No matter the strategy used the hook always works the same way.
+No matter the strategy used the hook should always work the same way and return the same params.
 
 1. Returns default data while real data is loaded from the API
 2. Returns errors, if there are any
 3. Returns the data once loaded from the API
 
 ## Strategies
-
-The hook offers a skeleton in which any strategies (data fetching libraries) can be plugged in.
 
 Currently these strategies are implemented:
 
