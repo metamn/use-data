@@ -2,6 +2,6 @@ export {
   default,
   useDataSWRPropTypes,
   useDataSWRDefaultProps,
-  useDataSWRGetHookProps,
-  useDataSWRGetInitialValue
+  getHookPropsUseDataSWR,
+  getInitialValueUseDataSWR
 } from "./useDataSWR";

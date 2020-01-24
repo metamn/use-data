@@ -98,6 +98,6 @@ export default useDataSWR;
 export {
   propTypes as useDataSWRPropTypes,
   defaultProps as useDataSWRDefaultProps,
-  getHookProps as useDataSWRGetHookProps,
-  getInitialValue as useDataSWRGetInitialValue
+  getHookProps as getHookPropsUseDataSWR,
+  getInitialValue as getInitialValueUseDataSWR
 };
