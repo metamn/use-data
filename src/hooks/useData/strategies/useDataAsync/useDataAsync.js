@@ -88,6 +88,6 @@ export default useDataAsync;
 export {
   propTypes as useDataAsyncPropTypes,
   defaultProps as useDataAsyncDefaultProps,
-  getHookProps as useDataAsyncGetHookProps,
-  getInitialValue as useDataAsyncGetInitialValue
+  getHookProps as getHookPropsUseDataAsync,
+  getInitialValue as getInitialValueUseDataAsync
 };
