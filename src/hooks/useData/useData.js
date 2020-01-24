@@ -16,7 +16,7 @@ import useDataAsync, {
   useDataAsyncDefaultProps,
   useDataAsyncGetHookProps,
   useDataAsyncGetInitialValue
-} from "../strategies/useDataAsync";
+} from "./strategies/useDataAsync";
 
 /*
 import useDataSWR, {
@@ -24,7 +24,7 @@ import useDataSWR, {
   useDataSWRDefaultProps,
   useDataSWRGetHookProps,
   useDataSWRGetInitialValue
-} from "../strategies/useDataSWR";
+} from "./strategies/useDataSWR";
 */
 
 /**
