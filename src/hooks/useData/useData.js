@@ -18,24 +18,26 @@ import useDataAsync, {
   useDataAsyncGetInitialValue
 } from "../strategies/useDataAsync";
 
+/*
 import useDataSWR, {
   useDataSWRPropTypes,
   useDataSWRDefaultProps,
   useDataSWRGetHookProps,
   useDataSWRGetInitialValue
 } from "../strategies/useDataSWR";
+*/
 
 /**
  * Defines the prop types
  */
-//const propTypes = PropTypes.shape(useDataAsyncPropTypes);
-const propTypes = PropTypes.shape(useDataSWRPropTypes);
+const propTypes = PropTypes.shape(useDataAsyncPropTypes);
+//const propTypes = PropTypes.shape(useDataSWRPropTypes);
 
 /**
  * Defines the default props
  */
-//const defaultProps = useDataAsyncDefaultProps;
-const defaultProps = useDataSWRDefaultProps;
+const defaultProps = useDataAsyncDefaultProps;
+//const defaultProps = useDataSWRDefaultProps;
 
 /**
  * Implements the hook
@@ -46,16 +48,18 @@ const useData = props => {
    *
    * - This step has to be performed to map a strategy to the hook code below
    */
-  //const initialValue = useDataAsyncGetInitialValue(props);
-  //const hookProps = useDataAsyncGetHookProps(props);
+  const initialValue = useDataAsyncGetInitialValue(props);
+  const hookProps = useDataAsyncGetHookProps(props);
+  /**
   const initialValue = useDataSWRGetInitialValue(props);
   const hookProps = useDataSWRGetHookProps(props);
+	*/
 
   /**
    * Queries the API
    */
-  //const { data, error, reload, cancel } = useDataAsync(hookProps);
-  const { data, error, reload, cancel } = useDataSWR(hookProps);
+  const { data, error, reload, cancel } = useDataAsync(hookProps);
+  //const { data, error, reload, cancel } = useDataSWR(hookProps);
 
   /**
    * Returns default data while real data is loaded from the API

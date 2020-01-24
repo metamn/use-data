@@ -6,8 +6,8 @@ import SWR from "./components/SWR";
 const App = () => {
   return (
     <>
-      <SWR />
-      {/*<Async />*/}
+      <Async />
+      {/*<SWR />*/}
     </>
   );
 };
