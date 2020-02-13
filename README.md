@@ -5,15 +5,15 @@ React data hook with pluggable strategies.
 ## Why another library?
 
 - The official [Suspense for data fetching](https://reactjs.org/docs/concurrent-mode-suspense.html) is experimental at this moment
-- What's left is to use similar libraries (strategies) like SWR or `react-async`
+- What's left is to use similar libraries (strategies) like `SWR` or `react-async`
 
 ## Approach
 
 1. Build a general data hook
 2. Integrate any library (strategy) like:
 
-- SWR
-- react-async
+- `SWR`
+- `react-async`
 - and more
 
 No matter the strategy used the hook should always work the same way and return the same params.
