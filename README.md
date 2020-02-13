@@ -33,4 +33,4 @@ Gives you the data hook with a few strategies implemented (see them in `/src/hoo
 
 ## Documentation
 
-See the [hook docs](./src/hooks/useAuth/useData.md) for details.
+See the [hook docs](./src/hooks/useData/useData.md) for details.
